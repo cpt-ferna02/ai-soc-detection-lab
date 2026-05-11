@@ -1,0 +1,37 @@
+{
+  "run_at": "2026-05-11T15:12:28.036932",
+  "results": [
+    {
+      "rule_id": "100002",
+      "description": "PowerShell execution detected (T1059.001)",
+      "verdict": "Malicious",
+      "severity": "Critical",
+      "json": "reports/enriched_100002_2026-05-10T21-14-33.json",
+      "markdown": "reports/report_100002_2026-05-10T21-14-33.md"
+    },
+    {
+      "rule_id": "100003",
+      "description": "Scheduled task created (T1053.005)",
+      "verdict": "Suspicious",
+      "severity": "High",
+      "json": "reports/enriched_100003_2026-05-10T21-15-07.json",
+      "markdown": "reports/report_100003_2026-05-10T21-15-07.md"
+    },
+    {
+      "rule_id": "100005",
+      "description": "System information discovery (T1082)",
+      "verdict": "Likely Benign",
+      "severity": "Medium",
+      "json": "reports/enriched_100005_2026-05-10T21-15-52.json",
+      "markdown": "reports/report_100005_2026-05-10T21-15-52.md"
+    },
+    {
+      "rule_id": "100004",
+      "description": "Registry query detected (T1012)",
+      "verdict": "Likely Benign",
+      "severity": "Medium",
+      "json": "reports/enriched_100004_2026-05-10T21-16-30.json",
+      "markdown": "reports/report_100004_2026-05-10T21-16-30.md"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+<!-- Local custom detection rules -->
+
+<group name="local,">
+
+	<rule id="100001" level="5">
+	  <match>test</match>
+	  <description>Test rule</description>
+	</rule>
+
+	<rule id="100002" level="10">
+	  <if_group>sysmon_event1</if_group>
+	  <field name="win.eventdata.image" type="pcre2">(?i)powershell\.exe</field>
+	  <description>PowerShell execution detected (T1059.001)</description>
+	  <mitre><id>T1059.001</id></mitre>
+	</rule>
+
+	<rule id="100003" level="10">
+	  <if_group>sysmon_event1</if_group>
+	  <field name="win.eventdata.image" type="pcre2">(?i)schtasks\.exe</field>
+	  <description>Scheduled task created (T1053.005)</description>
+	  <mitre><id>T1053.005</id></mitre>
+	</rule>
+
+	<rule id="100004" level="8">
+	  <if_group>sysmon_event1</if_group>
+	  <field name="win.eventdata.image" type="pcre2">(?i)reg\.exe</field>
+	  <description>Registry query detected (T1012)</description>
+	  <mitre><id>T1012</id></mitre>
+	</rule>
+
+	<rule id="100005" level="12">
+	  <if_group>sysmon_event1</if_group>
+	  <field name="win.eventdata.image" type="pcre2">(?i)systeminfo\.exe</field>
+	  <description>System information discovery (T1082)</description>
+	  <mitre><id>T1082</id></mitre>
+	</rule>
+
+
+</group>

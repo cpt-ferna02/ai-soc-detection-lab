@@ -1,0 +1,71 @@
+{
+  "generated_at": "2026-05-11T15:12:15.024002Z",
+  "original_alert": {
+    "timestamp": "2026-05-10T21:15:52.204+0000",
+    "rule": {
+      "id": "100005",
+      "level": 12,
+      "description": "System information discovery (T1082)",
+      "groups": [
+        "local",
+        "sysmon_event1"
+      ],
+      "mitre": {
+        "id": [
+          "T1082"
+        ]
+      }
+    },
+    "agent": {
+      "id": "001",
+      "name": "Win10-Victim",
+      "ip": "192.168.56.102"
+    },
+    "data": {
+      "win": {
+        "eventdata": {
+          "image": "C:\\Windows\\System32\\systeminfo.exe",
+          "commandLine": "systeminfo.exe",
+          "parentImage": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+          "parentCommandLine": "powershell.exe -ExecutionPolicy Bypass -File C:\\AtomicRedTeam\\atomics\\T1082\\T1082.ps1",
+          "user": "WIN10-VICTIM\\labuser",
+          "hashes": "SHA256=C3D4E5F6A7B8C9D0E1F2A3B4C5D6E7F8A9B0C1D2E3F4A5B6C7D8E9F0A1B2C3D4",
+          "currentDirectory": "C:\\AtomicRedTeam"
+        }
+      }
+    },
+    "full_log": "EventID=1 Image=systeminfo.exe User=labuser"
+  },
+  "ai_enrichment": {
+    "severity": "Medium",
+    "confidence": "High",
+    "mitre_technique": "T1082 \u2014 System Information Discovery",
+    "mitre_tactic": "Discovery",
+    "summary": "The native Windows utility systeminfo.exe was executed to enumerate detailed system configuration including OS version, hardware specs, hotfixes, and network configuration. This execution was spawned by a PowerShell script explicitly located in the Atomic Red Team testing framework directory, strongly indicating this is part of an authorized adversary simulation exercise rather than genuine threat actor activity.",
+    "ioc_indicators": [
+      "C:\\Windows\\System32\\systeminfo.exe",
+      "C:\\AtomicRedTeam\\atomics\\T1082\\T1082.ps1",
+      "powershell.exe -ExecutionPolicy Bypass",
+      "WIN10-VICTIM\\labuser",
+      "SHA256=C3D4E5F6A7B8C9D0E1F2A3B4C5D6E7F8A9B0C1D2E3F4A5B6C7D8E9F0A1B2C3D4",
+      "ParentImage: powershell.exe with Atomic Red Team script"
+    ],
+    "investigation_steps": [
+      "1. Confirm with security team whether Atomic Red Team testing is currently authorized on Win10-Victim (192.168.56.102)",
+      "2. Verify the labuser account is authorized to perform security testing activities",
+      "3. Review process tree for additional discovery commands executed before/after systeminfo (whoami, net user, ipconfig, etc.)",
+      "4. Check for data exfiltration attempts - did output get written to file or sent over network",
+      "5. Query for other T1082 test artifacts: Get-ComputerInfo, hostname, wmic os get commands",
+      "6. Review C:\\AtomicRedTeam directory for complete list of tests executed during this session"
+    ],
+    "containment_actions": [
+      "No immediate containment required if Atomic Red Team testing is authorized",
+      "If unauthorized: Isolate endpoint from network pending investigation",
+      "If unauthorized: Disable labuser account and revoke active sessions",
+      "Document test execution for purple team exercise records"
+    ],
+    "false_positive_likelihood": "High",
+    "false_positive_reasoning": "The parent process explicitly references C:\\AtomicRedTeam\\atomics\\T1082\\T1082.ps1, which is the standard Atomic Red Team test case for MITRE T1082, strongly indicating an authorized security test rather than malicious reconnaissance.",
+    "verdict": "Likely Benign"
+  }
+}

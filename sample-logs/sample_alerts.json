@@ -1,0 +1,102 @@
+[
+  {
+    "timestamp": "2026-05-10T21:14:33.412+0000",
+    "rule": {
+      "id": "100002",
+      "level": 10,
+      "description": "PowerShell execution detected (T1059.001)",
+      "groups": ["local", "sysmon_event1"],
+      "mitre": { "id": ["T1059.001"] }
+    },
+    "agent": { "id": "001", "name": "Win10-Victim", "ip": "192.168.56.102" },
+    "data": {
+      "win": {
+        "eventdata": {
+          "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+          "commandLine": "powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -EncodedCommand JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdA==",
+          "parentImage": "C:\\Windows\\System32\\cmd.exe",
+          "parentCommandLine": "cmd.exe /c powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -EncodedCommand JABjAD0ATgBlAHcALQBPAGIAagBlAGMAdA==",
+          "user": "WIN10-VICTIM\\labuser",
+          "hashes": "SHA256=A8C3E2D7F1B94056E2C1A34D78F29B6E5D0C1A2B3E4F5A6B7C8D9E0F1A2B3C4D",
+          "currentDirectory": "C:\\Users\\labuser\\Desktop"
+        }
+      }
+    },
+    "full_log": "EventID=1 Image=powershell.exe CommandLine=-EncodedCommand User=labuser"
+  },
+  {
+    "timestamp": "2026-05-10T21:15:07.881+0000",
+    "rule": {
+      "id": "100003",
+      "level": 10,
+      "description": "Scheduled task created (T1053.005)",
+      "groups": ["local", "sysmon_event1"],
+      "mitre": { "id": ["T1053.005"] }
+    },
+    "agent": { "id": "001", "name": "Win10-Victim", "ip": "192.168.56.102" },
+    "data": {
+      "win": {
+        "eventdata": {
+          "image": "C:\\Windows\\System32\\schtasks.exe",
+          "commandLine": "schtasks.exe /create /tn T1053_005_OnLogon /sc onlogon /tr C:\\Users\\labuser\\AppData\\Local\\Temp\\payload.exe /ru SYSTEM /f",
+          "parentImage": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+          "parentCommandLine": "powershell.exe -ExecutionPolicy Bypass -File C:\\AtomicRedTeam\\atomics\\T1053.005\\T1053.005.ps1",
+          "user": "WIN10-VICTIM\\labuser",
+          "hashes": "SHA256=2B3C4D5E6F7A8B9C0D1E2F3A4B5C6D7E8F9A0B1C2D3E4F5A6B7C8D9E0F1A2B3",
+          "currentDirectory": "C:\\AtomicRedTeam"
+        }
+      }
+    },
+    "full_log": "EventID=1 Image=schtasks.exe /create /tn T1053_005_OnLogon"
+  },
+  {
+    "timestamp": "2026-05-10T21:15:52.204+0000",
+    "rule": {
+      "id": "100005",
+      "level": 12,
+      "description": "System information discovery (T1082)",
+      "groups": ["local", "sysmon_event1"],
+      "mitre": { "id": ["T1082"] }
+    },
+    "agent": { "id": "001", "name": "Win10-Victim", "ip": "192.168.56.102" },
+    "data": {
+      "win": {
+        "eventdata": {
+          "image": "C:\\Windows\\System32\\systeminfo.exe",
+          "commandLine": "systeminfo.exe",
+          "parentImage": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+          "parentCommandLine": "powershell.exe -ExecutionPolicy Bypass -File C:\\AtomicRedTeam\\atomics\\T1082\\T1082.ps1",
+          "user": "WIN10-VICTIM\\labuser",
+          "hashes": "SHA256=C3D4E5F6A7B8C9D0E1F2A3B4C5D6E7F8A9B0C1D2E3F4A5B6C7D8E9F0A1B2C3D4",
+          "currentDirectory": "C:\\AtomicRedTeam"
+        }
+      }
+    },
+    "full_log": "EventID=1 Image=systeminfo.exe User=labuser"
+  },
+  {
+    "timestamp": "2026-05-10T21:16:30.099+0000",
+    "rule": {
+      "id": "100004",
+      "level": 8,
+      "description": "Registry query detected (T1012)",
+      "groups": ["local", "sysmon_event1"],
+      "mitre": { "id": ["T1012"] }
+    },
+    "agent": { "id": "001", "name": "Win10-Victim", "ip": "192.168.56.102" },
+    "data": {
+      "win": {
+        "eventdata": {
+          "image": "C:\\Windows\\System32\\reg.exe",
+          "commandLine": "reg.exe query HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon",
+          "parentImage": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+          "parentCommandLine": "powershell.exe -ExecutionPolicy Bypass -File C:\\AtomicRedTeam\\atomics\\T1012\\T1012.ps1",
+          "user": "WIN10-VICTIM\\labuser",
+          "hashes": "SHA256=D4E5F6A7B8C9D0E1F2A3B4C5D6E7F8A9B0C1D2E3F4A5B6C7D8E9F0A1B2C3D4E5",
+          "currentDirectory": "C:\\AtomicRedTeam"
+        }
+      }
+    },
+    "full_log": "EventID=1 Image=reg.exe query HKLM\\SOFTWARE"
+  }
+]
