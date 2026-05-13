@@ -1,5 +1,11 @@
 <!-- Local custom detection rules -->
 
+<!-- 
+  Custom detection rules for AI-Assisted SOC Detection Lab
+  Author: cpt-ferna02
+  MITRE ATT&CK techniques covered: T1059.001, T1053.005, T1012, T1082
+-->
+
 <group name="local,">
 
 	<rule id="100001" level="5">
